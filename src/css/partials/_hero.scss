@@ -23,6 +23,17 @@
         padding-bottom: 2.5rem;
         font-size: 14px;
     }
+    @include breakpoint(md) {
+        top: 15%;
+        left: 5%;
+        & .heading {
+            font-size: 55px;
+        }
+        & .text {
+            font-size: 18px;
+            max-width: 500px;
+        }
+    }
 }
 
 

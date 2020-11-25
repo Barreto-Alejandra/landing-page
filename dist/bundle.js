@@ -14182,11 +14182,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 gsap__WEBPACK_IMPORTED_MODULE_3__["default"].registerPlugin(gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"], gsap_all__WEBPACK_IMPORTED_MODULE_4__["TimelineMax"], gsap_all__WEBPACK_IMPORTED_MODULE_4__["Power2"]); //////////////////////////
 // IMPORT LIBRARIES JS
 //////////////////////////
-// Library name
-// import example from "example";
-//////////////////////////
-// JS BLOCKS
-//////////////////////////
 // header
 
 var Header = /*#__PURE__*/function () {
@@ -14199,23 +14194,29 @@ var Header = /*#__PURE__*/function () {
       menuActive: false,
       subMenuActive: false
     };
-    this.headerBlock = document.querySelector('#header');
+    this.headerContainer = document.querySelector("#header");
     this.start();
   }
 
   _createClass(Header, [{
     key: "start",
     value: function start() {
-      if (this.headerBlock) {
-        //sticky
-        this.stickyBlock = this.headerBlock.querySelector('.header-fix'); //responsive menu
+      if (this.headerContainer) {
+        // Sticky container
+        this.stickyContainer = this.headerContainer.querySelector(".header-fix"); // Responsive menu
 
-        this.buttonMenu = this.headerBlock.querySelector('#button-menu');
-        this.headerMenu = this.headerBlock.querySelector('#header-menu'); //sticky
+        this.menuButton = this.headerContainer.querySelector("#button__menu");
+        this.mainMenu = this.headerContainer.querySelector("#main__menu"); // Sub menu system
 
-        this.stickyTransparent(); //listener
+        this.menuItems = this.headerContainer.querySelectorAll(".header__nav--menu > .menu-item");
+        this.subMenuContainer = this.headerContainer.querySelectorAll(".header__nav--menu > .menu-item-has-children");
+        this.subMenuContainerL2 = this.headerContainer.querySelectorAll(".header__nav--menu > .menu-item-has-children"); // Sticky menu
 
-        this.buttonMenu.addEventListener('click', this.toggleMenu);
+        this.stickyTransparent(); // Accesibility
+
+        this.acckey = this.headerContainer.querySelectorAll(".header__navigation--social .social-item"); // Listeners
+
+        this.menuButton.addEventListener("click", this.toggleMenu);
       }
     }
   }, {
@@ -14224,36 +14225,58 @@ var Header = /*#__PURE__*/function () {
       var _this = this;
 
       if (this.state.menuActive === false) {
-        this.buttonMenu.classList.add('is-active');
-        this.headerMenu.classList.add('is-active');
-        this.headerBlock.classList.add('is-active');
-        document.body.classList.add('hidde-menu');
-        this.headerMenu.display = 'flex';
-        gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"].to(this.headerMenu, 0.5, {
+        this.menuButton.classList.add("is-active");
+        this.mainMenu.classList.add("is-active");
+        this.headerContainer.classList.add("is-active");
+        document.body.classList.add("hidde-menu"); // this.accesibilityInit({matches: true});
+
+        this.mainMenu.style.display = "flex";
+        gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"].to(this.mainMenu, 0.5, {
           delay: 0.2,
-          height: '100%',
+          height: "100%",
           opacity: 1
+        });
+        gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"].to(this.socialMobile, 0.8, {
+          delay: 0.2,
+          opacity: 1
+        });
+        gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"].to(this.menuItems, 0.8, {
+          delay: 0.2,
+          opacity: 1,
+          y: 0
         });
         setTimeout(function () {
           _this.state.menuActive = true;
         }, 800);
       } else {
-        this.buttonMenu.classList.remove('is-active');
-        this.headerMenu.classList.remove('is-active');
-        this.headerBlock.classList.remove('is-active');
-        document.body.classList.remove('hidde-menu'); // this.accesibilityInit({matches: false});
+        this.menuButton.classList.remove("is-active");
+        this.mainMenu.classList.remove("is-active");
+        this.headerContainer.classList.remove("is-active");
+        document.body.classList.remove("hidde-menu"); // this.accesibilityInit({matches: false});
 
-        gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"].to(this.headerMenu, 0.3, {
+        gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"].to(this.mainMenu, 0.3, {
           delay: 0.1,
           height: "100%",
           top: "100%",
           opacity: 0,
           onComplete: function onComplete() {
-            gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"].set(_this.headerMenu, {
+            gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"].set(_this.mainMenu, {
               clearProps: "all"
             });
           }
         });
+        gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"].to(this.menuItems, 0.1, {
+          opacity: 0,
+          y: "20px",
+          onComplete: function onComplete() {
+            gsap_all__WEBPACK_IMPORTED_MODULE_4__["TweenMax"].set(_this.menuItems, {
+              clearProps: "all"
+            });
+          }
+        });
+        setTimeout(function () {
+          _this.state.menuActive = false;
+        }, 400);
       }
     }
   }, {
@@ -14262,12 +14285,12 @@ var Header = /*#__PURE__*/function () {
       var _this2 = this;
 
       window.onscroll = function () {
-        var trigger = _this2.headerBlock.offsetHeight;
+        var trigger = _this2.headerContainer.offsetHeight;
 
-        if (window.pageYOffset > trigger - _this2.headerBlock.offsetHeight / 2) {
-          _this2.headerBlock.classList.add("is-sticky");
+        if (window.pageYOffset > trigger - _this2.headerContainer.offsetHeight / 2) {
+          _this2.headerContainer.classList.add("is-sticky");
         } else {
-          _this2.headerBlock.classList.remove("is-sticky");
+          _this2.headerContainer.classList.remove("is-sticky");
         }
       };
     }
@@ -14278,7 +14301,7 @@ var Header = /*#__PURE__*/function () {
 
       var keyItem = this.acckey[this.acckey.length - 1].children[0];
       keyItem.addEventListener("focusout", function (e) {
-        _this3.buttonMenu.focus();
+        _this3.menuButton.focus();
       });
     }
   }]);

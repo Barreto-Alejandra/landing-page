@@ -20,92 +20,122 @@ gsap.registerPlugin(TweenMax, TimelineMax, Power2);
 // IMPORT LIBRARIES JS
 //////////////////////////
 
-// Library name
-// import example from "example";
 
 
-
-//////////////////////////
-// JS BLOCKS
-//////////////////////////
 
 // header
 class Header {
-  constructor () {
+  constructor() {
     this.toggleMenu = this.toggleMenu.bind(this);
     this.accesibilityInit = this.accesibilityInit.bind(this);
+
     this.state = {
       menuActive: false,
       subMenuActive: false,
     };
-
-    this.headerBlock = document.querySelector('#header');
+    this.headerContainer = document.querySelector("#header");
     this.start();
   }
   start() {
-    if (this.headerBlock) {
-      //sticky
-      this.stickyBlock = this.headerBlock.querySelector('.header-fix');
+    if (this.headerContainer) {
+      // Sticky container
+      this.stickyContainer = this.headerContainer.querySelector(".header-fix");
+      // Responsive menu
+      this.menuButton = this.headerContainer.querySelector("#button__menu");
+      this.mainMenu = this.headerContainer.querySelector("#main__menu");
 
-      //responsive menu
-      this.buttonMenu = this.headerBlock.querySelector('#button-menu');
-      this.headerMenu = this.headerBlock.querySelector('#header-menu');
+      // Sub menu system
+      this.menuItems = this.headerContainer.querySelectorAll(
+        ".header__nav--menu > .menu-item"
+      );
+      this.subMenuContainer = this.headerContainer.querySelectorAll(
+        ".header__nav--menu > .menu-item-has-children"
+      );
+      this.subMenuContainerL2 = this.headerContainer.querySelectorAll(
+        ".header__nav--menu > .menu-item-has-children"
+      );
 
-      //sticky
+      // Sticky menu
       this.stickyTransparent();
 
-      //listener
-      this.buttonMenu.addEventListener('click', this.toggleMenu);
+      // Accesibility
+      this.acckey = this.headerContainer.querySelectorAll(
+        ".header__navigation--social .social-item"
+      );
+
+      // Listeners
+      this.menuButton.addEventListener("click", this.toggleMenu);
     }
   }
-
   toggleMenu() {
     if (this.state.menuActive === false) {
-      this.buttonMenu.classList.add('is-active');
-      this.headerMenu.classList.add('is-active');
-      this.headerBlock.classList.add('is-active');
-      document.body.classList.add('hidde-menu');
+      this.menuButton.classList.add("is-active");
+      this.mainMenu.classList.add("is-active");
+      this.headerContainer.classList.add("is-active");
+      document.body.classList.add("hidde-menu");
+      // this.accesibilityInit({matches: true});
 
-      this.headerMenu.display = 'flex';
-      TweenMax.to(this.headerMenu, 0.5, {
+      this.mainMenu.style.display = "flex";
+      TweenMax.to(this.mainMenu, 0.5, {
         delay: 0.2,
-        height: '100%',
+        height: "100%",
         opacity: 1,
+      });
+      TweenMax.to(this.socialMobile, 0.8, {
+        delay: 0.2,
+        opacity: 1,
+      });
+      TweenMax.to(this.menuItems, 0.8, {
+        delay: 0.2,
+        opacity: 1,
+        y: 0,
       });
 
       setTimeout(() => {
         this.state.menuActive = true;
       }, 800);
-
     } else {
-      this.buttonMenu.classList.remove('is-active');
-      this.headerMenu.classList.remove('is-active');
-      this.headerBlock.classList.remove('is-active');
-      document.body.classList.remove('hidde-menu');
+      this.menuButton.classList.remove("is-active");
+      this.mainMenu.classList.remove("is-active");
+      this.headerContainer.classList.remove("is-active");
+      document.body.classList.remove("hidde-menu");
       // this.accesibilityInit({matches: false});
-      TweenMax.to(this.headerMenu, 0.3, {
+      TweenMax.to(this.mainMenu, 0.3, {
         delay: 0.1,
         height: "100%",
         top: "100%",
         opacity: 0,
         onComplete: () => {
-          TweenMax.set(this.headerMenu, {
+          TweenMax.set(this.mainMenu, {
             clearProps: "all",
           });
         },
       });
+      TweenMax.to(this.menuItems, 0.1, {
+        opacity: 0,
+        y: "20px",
+        onComplete: () => {
+          TweenMax.set(this.menuItems, {
+            clearProps: "all",
+          });
+        },
+      });
+      setTimeout(() => {
+        this.state.menuActive = false;
+      }, 400);
     }
   }
+  
   stickyTransparent() {
     window.onscroll = () => {
-      const trigger = this.headerBlock.offsetHeight;
+      const trigger = this.headerContainer.offsetHeight;
       if (
         window.pageYOffset >
-        trigger - this.headerBlock.offsetHeight / 2
+        trigger - this.headerContainer.offsetHeight / 2
       ) {
-        this.headerBlock.classList.add("is-sticky");
+        this.headerContainer.classList.add("is-sticky");
       } else {
-        this.headerBlock.classList.remove("is-sticky");
+        this.headerContainer.classList.remove("is-sticky");
       }
     };
   }
@@ -113,7 +143,7 @@ class Header {
     const keyItem = this.acckey[this.acckey.length - 1].children[0];
 
     keyItem.addEventListener("focusout", (e) => {
-      this.buttonMenu.focus();
+      this.menuButton.focus();
     });
   }
 }

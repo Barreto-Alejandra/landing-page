@@ -47,7 +47,7 @@ p:empty
 
 .subheading
     margin: 0 0 20px
-    font-family: $font-secondary
+    font-family: $font-main
     font-weight: 500
 
 ////////////////////////
@@ -55,12 +55,12 @@ p:empty
 ///////////////////////
 
 p.text, .text p, .text
-    font-family: $font-secondary
+    font-family: $font-main
     line-height: 1.4
     letter-spacing: 0.90px
     font-weight: 300
     & *
-        font-family: $font-secondary
+        font-family: $font-main
     strong, b
         font-weight: bold
     a
@@ -103,6 +103,10 @@ p.text, .text p, .text
         font-weight: 700
         border-radius: 22px
         padding: 15px 35px
+        transition: .5s ease all
+        &:hover, &:focus
+            background: linear-gradient(to top,#04befe 0%, #4481eb 100%)
+            
 
 ////////////////////////
 // Helpers
