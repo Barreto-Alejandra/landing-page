@@ -15,6 +15,8 @@ import gsap from "gsap";
 import { TweenMax, TimelineMax, Power2 } from "gsap/all";
 gsap.registerPlugin(TweenMax, TimelineMax, Power2);
 
+import ScrollMagic from 'scrollmagic';
+
 
 //////////////////////////
 // IMPORT LIBRARIES JS
@@ -149,11 +151,39 @@ class Header {
 }
 
 
+// build scene
+class Scroll {
+  constructor () {
+    this.revealElement = document.querySelector('#trigger1');
+    this.start();
+  }
+  start() {
+    if (this.revealElement) {
+
+      const controller = new ScrollMagic.Controller({});
+
+      const myscene = new ScrollMagic.Scene({
+        triggerElement: "#trigger1",
+        triggerHook: 0.9, 
+        duration: "80%", 
+        offset: 50,
+      })
+      .setClassToggle("#reveal1", "visible")
+      .addIndicators()
+      .addTo(controller);
+    }
+  }
+  
+}
+
+
+
 ////////////////////
 // Run apps
 ////////////////////
 document.addEventListener('DOMContentLoaded', function () {
   var header = new Header();
+  var scroll = new Scroll();
 });
 
 
