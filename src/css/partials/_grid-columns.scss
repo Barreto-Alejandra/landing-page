@@ -6,7 +6,6 @@
         margin: 0 auto;
         & .heading {
             line-height: 1.2;
-            text-align: center;
             padding-bottom: 4rem;
         }
     }
@@ -21,7 +20,7 @@
     cursor: pointer;
     transition: .3s all ease-in-out;
     & figure {
-        width: 100px;
+        width: 100%;
         max-width: 100px;
         margin: 0 auto;
         & img {
@@ -45,5 +44,18 @@
     }
     &:hover, &:focus {
         box-shadow: 0px 0px 10px #4481eb;
+    }
+    @include breakpoint(md) {
+        margin-bottom: 0;
+        & figure {
+            max-width: 115px;
+            height: 140px;
+        }
+        & .subheading {
+            font-size: 25px;
+        }
+        & .text {
+            font-size: 16px;
+        }
     }
 }

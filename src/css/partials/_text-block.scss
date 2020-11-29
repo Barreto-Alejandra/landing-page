@@ -27,6 +27,9 @@
    padding-top: 3rem;
    padding-bottom: 3rem;
    text-align: center;
+   @include breakpoint(md) {
+      padding-bottom: 8rem;
+   }
 }
 
 

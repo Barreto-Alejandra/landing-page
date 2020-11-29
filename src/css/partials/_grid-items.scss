@@ -1,0 +1,34 @@
+.griditems {
+    padding: 3rem 0;
+}
+
+
+.griditems__container--content {
+    padding-top: 2rem;
+    .menu-list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        .menu-list__item {
+            position: relative;
+            color: $black-2;
+            font-size: 14px;
+            letter-spacing: 0.92px;
+            line-height: 1.4;
+            font-weight: 300;
+            padding-left: 20px;
+            margin-bottom: 1rem;
+            &::before {
+                position: absolute;
+                content: '';
+                top: 5px;
+                left: 0;
+                background-image: url(../assets/icons/check-icon.svg);
+                background-size: contain;
+                background-repeat: no-repeat;
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+}
