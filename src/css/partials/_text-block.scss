@@ -20,3 +20,33 @@
              -o-transform: none;
                     transform: none;
 }
+
+
+
+.textblock {
+   padding-top: 3rem;
+   padding-bottom: 3rem;
+   text-align: center;
+}
+
+
+.textblock__container {
+   max-width: 90%;
+   margin: 0 auto;
+   & .text {
+      margin: 0;
+      padding-top: 1.3rem;
+      font-size: 16px;
+      & p {
+         line-height: 1.5;
+      }
+   }
+   @include breakpoint(md) {
+      max-width: 100%;
+      & .text {
+         font-size: 18px;
+         max-width: 612px;
+         margin: 0 auto;
+      }
+   }
+}

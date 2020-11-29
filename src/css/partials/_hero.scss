@@ -9,7 +9,7 @@
 
 .hero__container {
     position: relative;
-    top: 10%;
+    top: 8%;
     padding: 0 1.5rem;
     z-index: 100;
     color: $black-2;
@@ -47,4 +47,8 @@
     background-size: 80%;
     background-position: right;
     background-repeat: no-repeat;
+    @include breakpoint(md) {
+        bottom: -360px;
+        background-size: 90%;
+    }
 }
