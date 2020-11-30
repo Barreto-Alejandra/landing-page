@@ -17143,7 +17143,7 @@ var Scroll = /*#__PURE__*/function () {
   function Scroll() {
     _classCallCheck(this, Scroll);
 
-    this.revealElement = document.querySelector('#trigger1');
+    this.revealElement = document.querySelectorAll('#trigger1');
     this.start();
   }
 

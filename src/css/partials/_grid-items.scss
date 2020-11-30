@@ -3,6 +3,8 @@
 }
 
 
+
+
 .griditems__container--content {
     padding-top: 2rem;
     .menu-list {
@@ -28,6 +30,15 @@
                 background-repeat: no-repeat;
                 width: 10px;
                 height: 10px;
+            }
+        }
+    }
+    @include breakpoint(md) {
+        max-width: 480px;
+        margin: 0 auto;
+        .menu-list {
+            .menu-list__item  {
+                font-size: 16px;
             }
         }
     }

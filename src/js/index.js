@@ -18,6 +18,8 @@ gsap.registerPlugin(TweenMax, TimelineMax, Power2);
 import ScrollMagic from 'scrollmagic';
 
 
+
+
 //////////////////////////
 // IMPORT LIBRARIES JS
 //////////////////////////
@@ -154,7 +156,7 @@ class Header {
 // build scene
 class Scroll {
   constructor () {
-    this.revealElement = document.querySelector('#trigger1');
+    this.revealElement = document.querySelectorAll('#trigger1');
     this.start();
   }
   start() {
